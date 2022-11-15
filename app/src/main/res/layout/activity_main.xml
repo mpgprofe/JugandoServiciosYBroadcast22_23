@@ -49,9 +49,22 @@
 
     <Button
         android:id="@+id/buttonStartMp3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="223dp" />
+        android:layout_width="72dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="135dp"
+        android:background="@android:drawable/ic_media_play"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonStopMp3"
+        app:layout_constraintEnd_toStartOf="@+id/buttonStopMp3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonStopMp3" />
+
+    <Button
+        android:id="@+id/buttonStopMp3"
+        android:layout_width="71dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCrono" />
 </androidx.constraintlayout.widget.ConstraintLayout>

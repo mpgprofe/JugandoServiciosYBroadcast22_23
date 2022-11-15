@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonStartCrono, buttonStopCrono;
+    Button buttonStartCrono, buttonStopCrono, buttonStartMP3, buttonStopMP3;
     TextView textViewCrono;
 
     SiLaBateriaCambia siLaBateriaCambia = new SiLaBateriaCambia();
@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         buttonStartCrono = findViewById(R.id.buttonStartCrono);
         buttonStopCrono = findViewById(R.id.buttonStopCrono);
         textViewCrono = findViewById(R.id.textViewCrono);
+        buttonStartMP3 = findViewById(R.id.buttonStartMp3);
+        buttonStopMP3 =findViewById(R.id.buttonStopMp3);
 
         ServicioCrono.setMainActivity(this);
 
@@ -55,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
                 stopService(new Intent(getBaseContext(), ServicioCrono.class));
             }
         });
+
+        buttonStartMP3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startService(new Intent(getBaseContext(), ServicioMP3.class));
+
+            }
+        });
+        buttonStopMP3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopService(new Intent(getBaseContext(), ServicioMP3.class));
+            }
+        });
+
+
 
     }
 
