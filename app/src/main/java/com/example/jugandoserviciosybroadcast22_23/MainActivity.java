@@ -1,5 +1,9 @@
 package com.example.jugandoserviciosybroadcast22_23;
-
+/*
+Documentación interesante:
+Para las diferentes actions : https://chromium.googlesource.com/android_tools/+/refs/heads/main/sdk/platforms/android-28/data/broadcast_actions.txt
+https://developer.android.com/guide/components/broadcasts#context-registered-recievers
+ */
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.BroadcastReceiver;
@@ -8,9 +12,15 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    Button buttonStartCrono, buttonStopCrono;
+    TextView textViewCrono;
 
     SiLaBateriaCambia siLaBateriaCambia = new SiLaBateriaCambia();
 
@@ -18,7 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//Para las diferentes actions : https://chromium.googlesource.com/android_tools/+/refs/heads/main/sdk/platforms/android-28/data/broadcast_actions.txt
+        buttonStartCrono = findViewById(R.id.buttonStartCrono);
+        buttonStopCrono = findViewById(R.id.buttonStopCrono);
+        textViewCrono = findViewById(R.id.textViewCrono);
+
+        ServicioCrono.setMainActivity(this);
+
         IntentFilter intentFilter = new IntentFilter("android.intent.action.ACTION_POWER_CONNECTED");
         intentFilter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
         intentFilter.addAction("android.intent.action.BATTERY_LOW");
@@ -27,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
 
         getBaseContext().registerReceiver(siLaBateriaCambia, intentFilter);
 
+        buttonStartCrono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startService(new Intent(getBaseContext(), ServicioCrono.class));
+
+            }
+        });
+
+    }
+
+    void actualizarCrono(String cadena){
+        textViewCrono.setText(cadena);
     }
 
     private class SiLaBateriaCambia extends BroadcastReceiver{
