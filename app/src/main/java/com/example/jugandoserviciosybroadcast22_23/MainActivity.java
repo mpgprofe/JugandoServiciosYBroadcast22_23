@@ -49,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        buttonStopCrono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopService(new Intent(getBaseContext(), ServicioCrono.class));
+            }
+        });
 
     }
 
